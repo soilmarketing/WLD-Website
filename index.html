@@ -141,14 +141,6 @@ section{padding:80px 80px}
   display:flex;flex-direction:column;align-items:center;
   min-width:0;
 }
-.hero-rule{
-  display:flex;align-items:center;gap:16px;
-  width:100%;max-width:var(--lock,620px);margin:0 0 28px;
-}
-.hero-rule::after{content:'';height:1px;flex:1;background:rgba(255,213,138,0.3)}
-.hero-rule span{
-  font-size:11.5px;letter-spacing:0.18em;color:#FFD58A;font-weight:500;white-space:nowrap;
-}
 
 .hero::before{
   content:'\0950';
@@ -293,7 +285,6 @@ section{padding:80px 80px}
 .hero-meta-item:last-child{border-right:none}
 .hero-meta-item svg{width:15px;height:15px;stroke:#FFD58A;fill:none;stroke-width:1.8;flex-shrink:0}
 .hero-meta-item span{font-size:13px;color:#FFF8E8;font-weight:500;letter-spacing:0.02em}
-.hero-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
 .btn-gold{
   font-family:'Inter',sans-serif;font-size:14px;font-weight:600;
   background:var(--gold);color:var(--white);border:none;
@@ -309,52 +300,12 @@ section{padding:80px 80px}
   transition:all 0.2s;
 }
 .btn-outline-white:hover{border-color:var(--gold-light);color:var(--gold-light)}
-.hero-pillars{
-  margin-top:4px;padding-top:22px;
-  border-top:1px solid rgba(255,213,138,0.15);
-  display:flex;gap:18px;justify-content:flex-start;flex-wrap:wrap;
-  width:100%;max-width:var(--lock,620px);margin-left:0;margin-right:0;
-}
 .hero-credit{
   margin-top:2px;font-size:11.5px;letter-spacing:0.18em;text-transform:uppercase;
   color:#FFD58A;font-weight:600;
   text-shadow:0 2px 12px rgba(0,0,0,0.4);
 }
-.hero-pillar{font-size:11px;color:rgba(255,248,232,0.7);letter-spacing:0.08em;font-weight:500}
-.hero-pillar::before{content:'✦ ';color:#FFD58A}
-
-/* ── BROCHURE STRIP ── */
-.brochure-strip{
-  background:#2C1810;border-top:2px solid rgba(212,168,67,0.3);padding:40px 80px;
-  display:flex;align-items:center;justify-content:space-between;gap:32px;
-}
-.brochure-strip h3{
-  font-family:'Cormorant Garamond',serif;
-  font-size:26px;font-weight:600;color:var(--white);margin-bottom:4px;
-}
-.brochure-strip p{font-size:14px;color:rgba(255,255,255,0.55)}
-.brochure-form{display:flex;gap:10px;align-items:center;flex-shrink:0}
-.brochure-form input{
-  font-family:'Inter',sans-serif;font-size:13px;
-  padding:11px 16px;border-radius:4px;
-  background:rgba(255,255,255,0.08);
-  border:1px solid rgba(255,255,255,0.2);
-  color:var(--white);outline:none;width:220px;
-}
-.brochure-form input::placeholder{color:rgba(255,255,255,0.3)}
-.brochure-form input:focus{border-color:var(--gold-light)}
 .brochure-form input.invalid{border-color:#FF8A3D;background:rgba(255,138,61,0.14)}
-.brochure-done{
-  display:flex;align-items:center;gap:12px;
-  font-family:'Inter',sans-serif;font-size:14px;color:var(--white);
-  background:rgba(255,213,138,0.10);border:1px solid rgba(255,213,138,0.32);
-  border-radius:6px;padding:16px 20px;line-height:1.6;
-}
-.brochure-done svg{
-  width:22px;height:22px;flex-shrink:0;fill:none;stroke:var(--gold-light);
-  stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;
-}
-.brochure-done a{color:var(--gold-light);text-decoration:underline;cursor:pointer}
 
 /* ── VISION ── */
 .vision-grid{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center}
@@ -1165,7 +1116,6 @@ footer{
   nav{padding:12px 32px}
   section{padding:64px 44px}
   .hero{padding:108px 44px 64px;gap:40px}
-  .brochure-strip{padding:36px 44px}
   footer{padding:36px 44px}
   .about-hero{padding:64px 44px}
   .vision-grid{gap:48px}
@@ -1251,20 +1201,7 @@ footer{
   .hero-cta-rule{margin:22px 0 20px}
   .hero-cta-btn{font-size:12.5px;padding:14px 16px}
   .hero-cta-btn.is-primary{font-size:14px;padding:15px 16px}
-  .hero-rule{gap:12px;margin-bottom:24px}
-  .hero-rule span{font-size:10px;letter-spacing:0.12em;white-space:normal}
   .hero-credit{margin-top:2px;font-size:10.5px;letter-spacing:0.14em}
-  .hero-pillars{gap:9px 16px;margin-top:12px;padding-top:18px}
-  .hero-btns{flex-wrap:wrap;gap:10px}
-  .hero-btns button{flex:1 1 100%}
-
-  .brochure-strip{
-    flex-direction:column;align-items:stretch;text-align:center;
-    padding:32px 20px;gap:18px;
-  }
-  .brochure-form{flex-direction:column;align-items:stretch;width:100%}
-  .brochure-form input{width:100%}
-  .brochure-strip h3{font-size:23px}
 
   .join-grid,.room-cards{grid-template-columns:1fr}
   .join-card{padding:24px 20px}
@@ -1317,6 +1254,23 @@ footer{
   .doc-summary{font-size:13px}
   .reg-cta-note{font-size:11.5px!important}
   .accomm-col-label{margin-bottom:10px}
+
+  /* forms and panels added since the first mobile pass */
+  .hero-cta{padding:22px 18px 24px}
+  .hero-form{gap:9px}
+  .hero-cta-rule{margin:26px 0 20px}
+  .sponsor-card .lede{font-size:13px;margin-bottom:20px}
+  .schol-form-intro{font-size:13px;margin-bottom:22px}
+  .f-group{margin-bottom:15px}
+  .f-group label{font-size:10.5px;letter-spacing:0.1em}
+  .f-group textarea{min-height:92px}
+  .f-done{padding:22px 6px}
+  .f-done h4{font-size:22px}
+  .f-done p{font-size:13.5px}
+  .schol-step{padding:22px 20px}
+  .schol-step-num{font-size:30px;margin-bottom:8px}
+  .invite-meta-name{font-size:14px}
+  .invite-meta-role{font-size:12.5px}
   .speaker-featured-day{white-space:normal;line-height:1.5}
 }
 
@@ -1332,9 +1286,13 @@ footer{
   .speaker-role{font-size:11px}
   .partner-item img{height:34px}
   .partners-title{font-size:16px;letter-spacing:0.06em}
-  .hero-pillar{font-size:10.5px}
   .reg-cta{padding:26px 18px}
   .reg-qr img{width:138px;height:138px}
+  .hero-cta{padding:18px 14px 20px}
+  .hero-field input{padding:12px 13px}
+  .sponsor-card{padding:22px 16px 20px}
+  .schol-form-wrap{padding:22px 16px 20px}
+  .invite-frame{max-width:210px}
 }
 
 /* ---- landscape phones: don't let the hero eat the screen ---- */
