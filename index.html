@@ -2243,13 +2243,40 @@ function getBrochure(p){
 var WLD_BROCHURE_ALTS = ['WLD_Brochure.pdf','wld-brochure.pdf','WLD_BROCHURE.pdf'];
 
 function startBrochureDownload(){
-  var a = document.createElement('a');
-  a.href = WLD_BROCHURE;
-  a.setAttribute('download','World Leadership Dialogue 2027 Brochure.pdf');
-  a.style.display = 'none';
-  document.body.appendChild(a);
-  a.click();
-  setTimeout(function(){ document.body.removeChild(a); }, 1000);
+  var nice = 'World Leadership Dialogue 2027 Brochure.pdf';
+
+  /* The download attribute alone is ignored by some browsers and by any
+     server that sends its own Content-Disposition, which is why the file
+     was arriving under its repo name. Fetching it as a blob first forces
+     the name we want. Falls back to a plain link if the fetch fails. */
+  fetch(WLD_BROCHURE)
+    .then(function(r){
+      if(!r.ok) throw new Error('not found');
+      return r.blob();
+    })
+    .then(function(blob){
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement('a');
+      a.href = url;
+      a.download = nice;
+      a.style.display = 'none';
+      document.body.appendChild(a);
+      a.click();
+      setTimeout(function(){
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+      }, 1500);
+    })
+    .catch(function(){
+      var a = document.createElement('a');
+      a.href = WLD_BROCHURE;
+      a.setAttribute('download', nice);
+      a.target = '_blank';
+      a.style.display = 'none';
+      document.body.appendChild(a);
+      a.click();
+      setTimeout(function(){ document.body.removeChild(a); }, 1500);
+    });
 }
 
 function submitContact(ev){
@@ -2285,8 +2312,7 @@ function submitContact(ev){
       '<div class="f-done">' +
         '<div class="f-done-mark"><svg viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/></svg></div>' +
         '<h4>Message sent.</h4>' +
-        '<p>Thank you for writing to us. Our team will respond within 2 working days at ' +
-        (data['Email'] || 'the email you gave us') + '.</p>' +
+        '<p>Thank you for writing to us. Our team will respond within 2 working days.</p>' +
       '</div>';
     card.scrollIntoView({behavior:'smooth', block:'center'});
   }).catch(function(){
@@ -2332,8 +2358,7 @@ function submitSponsor(ev){
       '<div class="f-done">' +
         '<div class="f-done-mark"><svg viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/></svg></div>' +
         '<h4>Thank you.</h4>' +
-        '<p>Your interest in World Leadership Dialogue 2027 has reached our team. We will reach out to you shortly at ' +
-        (data['Email'] || 'the email you gave us') + '.</p>' +
+        '<p>Your interest in World Leadership Dialogue 2027 has reached our team. We will reach out to you shortly.</p>' +
       '</div>';
     card.scrollIntoView({behavior:'smooth', block:'center'});
   }).catch(function(){
@@ -2381,8 +2406,7 @@ function submitSchol(ev){
       '<div class="f-done">' +
         '<div class="f-done-mark"><svg viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/></svg></div>' +
         '<h4>Thank you, ' + (data['Name'] ? data['Name'].split(' ')[0] : '') + '.</h4>' +
-        '<p>Your application has reached the organising team. We read every one, and you will hear from us at ' +
-        (data['Email'] || 'the email you gave us') + '.</p>' +
+        '<p>Your application has reached the organising team. You will hear from us shortly.</p>' +
       '</div>';
     card.scrollIntoView({behavior:'smooth', block:'center'});
   }).catch(function(){
